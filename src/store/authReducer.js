@@ -1,9 +1,11 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
-export const toggleLoggIn = createAction("TOGGLE_LOGGIN");
+export const setLogginTrue = createAction("SET_LOG_IN_TRUE");
+export const setLogginFalse = createAction("SET_LOG_IN_FALSE");
 
 const authReducer = createReducer(false, {
-  [toggleLoggIn]: (state, action) => !state.isLoggedIn,
+  [setLogginTrue]: (state, action) => true,
+  [setLogginFalse]: (state, action) => false,
 });
 
 export default authReducer;

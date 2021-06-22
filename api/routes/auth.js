@@ -6,7 +6,7 @@ const passport = require("passport");
 router.post("/register", async (req, res, next) => {
   try {
     const user = await User.create(req.body);
-    res.endStatus(201).json(user);
+    res.status(201).json(user);
   } catch (err) {
     next(err);
   }

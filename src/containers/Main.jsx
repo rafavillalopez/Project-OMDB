@@ -10,6 +10,9 @@ export default function Main() {
       <Link to="/register">
         <button>Register</button>
       </Link>
+      <Link to="/loggin">
+        <button>Log In</button>
+      </Link>
     </>
   );
 }

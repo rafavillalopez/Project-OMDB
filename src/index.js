@@ -19,7 +19,7 @@ ReactDOM.render(
         <Route exact path="/movies" component={AllMovies} />
         <Route path="/movies/:id" component={SingleMovie} />
         <Route path="/register" component={Register} />
-        <Route path="/login" component={Loggin} />
+        <Route path="/loggin" component={Loggin} />
       </Browser>
     </Provider>
   </React.StrictMode>,

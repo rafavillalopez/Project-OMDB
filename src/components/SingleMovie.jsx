@@ -22,7 +22,9 @@ export default function SingleMovie() {
       <img src={selectedMovie["Poster"]} alt={selectedMovie["Title"]} />
       {/* <button>Add To Favorites</button> */}
       <p>{selectedMovie["Plot"]}</p>
-      <Link to="/"><button>Volver</button></Link>
+      <Link to="/movies">
+        <button>Volver</button>
+      </Link>
     </div>
   );
 }

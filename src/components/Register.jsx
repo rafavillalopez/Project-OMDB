@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
-import { register } from "../store/userReducer";
+import { register } from "../store/logRegReducer";
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ export default function Register() {
       email: "",
       password: "",
     });
-    history.push("/login");
+    history.push("/loggin");
   };
 
   return (
@@ -57,6 +58,9 @@ export default function Register() {
         />
         <button>Register</button>
       </form>
+      <Link to="/">
+        <button>Go Back</button>
+      </Link>
     </div>
   );
 }

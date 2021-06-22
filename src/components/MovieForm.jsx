@@ -9,12 +9,14 @@ export default function MovieForm() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { value, onChange} = useInput();
+  const { value, onChange } = useInput();
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(getMovies(value));
-    history.push("/movies")
+    if (value.length > 1) {
+      dispatch(getMovies(value));
+      history.push("/movies");
+    }
   };
 
   return (

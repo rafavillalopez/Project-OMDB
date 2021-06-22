@@ -22,7 +22,7 @@ export const getMovies = createAsyncThunk("GET_MOVIES", async (title) => {
 });
 
 const moviesReducer = createReducer([], {
-  [getMovies.pending]: (state, action) => ["...searching"],
+  [getMovies.pending]: (state, action) => ["searching..."],
   [getMovies.fulfilled]: (state, action) => action.payload,
   [getMovies.rejected]: (state, action) => ["No entries for this title"],
 });
