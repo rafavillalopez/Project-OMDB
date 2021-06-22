@@ -1,6 +1,13 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 
-export default function SearchInput() {
+import { register } from "../store/userReducer";
+
+export default function Register() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const [value, setValue] = useState({
     name: "",
     email: "",
@@ -15,7 +22,13 @@ export default function SearchInput() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(value);
+    dispatch(register(value));
+    setValue({
+      name: "",
+      email: "",
+      password: "",
+    });
+    history.push("/login");
   };
 
   return (

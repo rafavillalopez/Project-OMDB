@@ -9,6 +9,7 @@ import Main from "./containers/Main";
 import AllMovies from "./components/AllMovies/AllMovies";
 import SingleMovie from "./components/SingleMovie";
 import Register from "./components/Register";
+import Loggin from "./components/Loggin";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,6 +19,7 @@ ReactDOM.render(
         <Route exact path="/movies" component={AllMovies} />
         <Route path="/movies/:id" component={SingleMovie} />
         <Route path="/register" component={Register} />
+        <Route path="/login" component={Loggin} />
       </Browser>
     </Provider>
   </React.StrictMode>,

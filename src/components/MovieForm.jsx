@@ -3,9 +3,9 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
 import useInput from "../hooks/useInput";
-import { getMovies } from "../store/movies";
+import { getMovies } from "../store/moviesReducer";
 
-export default function SearchInput() {
+export default function MovieForm() {
   const dispatch = useDispatch();
   const history = useHistory();
 

@@ -1,4 +1,6 @@
-// run seed
+const { User } = require("./models");
 
-// cerra el proceso una vez completado con:
-// process.exit();
+(async () => {
+  const user  = await User.findByPk(1)
+  user.addFavorite("imdb123")
+})()

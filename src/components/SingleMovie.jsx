@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 
-import { selectMovie } from "../store/selectedMovie";
+import { selectMovie } from "../store/selectedMovieReducer";
 
 export default function SingleMovie() {
   const dispatch = useDispatch();
