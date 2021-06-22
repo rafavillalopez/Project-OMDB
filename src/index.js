@@ -1,10 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Browser, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./store/store";
+
 import "./index.css";
+import Main from "./containers/Main";
+import AllMovies from "./components/AllMovies/AllMovies";
+import SingleMovie from "./components/SingleMovie";
+import Register from "./components/Register";
 
 ReactDOM.render(
   <React.StrictMode>
-    <h1>Open Movie Data Base</h1>
+    <Provider store={store}>
+      <Browser>
+        <Route exact path="/" component={Main} />
+        <Route exact path="/movies" component={AllMovies} />
+        <Route path="/movies/:id" component={SingleMovie} />
+        <Route path="/register" component={Register} />
+      </Browser>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
