@@ -1,7 +1,23 @@
 const express = require("express");
+const { Op } = require("sequelize");
 const router = express.Router();
 const { User, Favorite } = require("../models");
 
+router.get("/", async (req, res, next) => {
+  try {
+    const users = await User.findAll({
+      where: {
+        name: {
+          [Op.substring]: req.query.name,
+        },
+      },
+      include: [{ model: Favorite }],
+    });
+    res.status(200).json(users);
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.get("/:id", async (req, res, next) => {
   try {
@@ -16,9 +32,9 @@ router.get("/:id", async (req, res, next) => {
 
 router.get("/:id/favorites", async (req, res, next) => {
   try {
-   const user = await User.findByPk(req.params.id, {
-     include: [{ model: Favorite }],
-   });
+    const user = await User.findByPk(req.params.id, {
+      include: [{ model: Favorite }],
+    });
     res.status(200).json(user.favorites);
   } catch (err) {
     next(err);

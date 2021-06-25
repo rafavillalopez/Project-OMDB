@@ -8,7 +8,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const app = express();
 
 
-const { User } = require("./models");
+const { User, Favorite } = require("./models");
 const db = require("./db");
 
 
@@ -60,7 +60,9 @@ passport.serializeUser( (user, done) =>{
 });
 
 passport.deserializeUser( (id, done)=> {
-  User.findByPk(id).then((user) => done(null, user));
+  User.findByPk(id, {
+    include: [{ model: Favorite }],
+  }).then((user) => done(null, user));
 });
 
 // Express Routing

@@ -68,39 +68,21 @@ const userReducer = createReducer([], {
   [getFavorites.fulfilled]: (state, action) => {
     return action.payload;
   },
-  [getFavorites.rejected]: (state, action) => {
-    return [
-      {
-        err: action.error,
-      },
-    ];
-  },
+  [getFavorites.rejected]: (state, action) => [],
   [addFavorite.pending]: (state, action) => {
     return [{ msg: "adding..." }];
   },
   [addFavorite.fulfilled]: (state, action) => {
     return action.payload;
   },
-  [addFavorite.rejected]: (state, action) => {
-    return [
-      {
-        err: action.error,
-      },
-    ];
-  },
+  [addFavorite.rejected]: (state, action) => [],
   [removeFavorite.pending]: (state, action) => {
     return [{ msg: "deleting..." }];
   },
   [removeFavorite.fulfilled]: (state, action) => {
     return action.payload;
   },
-  [removeFavorite.rejected]: (state, action) => {
-    return [
-      {
-        err: action.error,
-      },
-    ];
-  },
+  [removeFavorite.rejected]: (state, action) => [],
   [setFavoritesVoid]: (state, action) => (state = []),
 });
 

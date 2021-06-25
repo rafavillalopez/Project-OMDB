@@ -21,11 +21,18 @@
 .movieFormDiv {
   display: inline-block;
   margin-left: 40px;
-  width: 70%;
+  width: 55%;
 }
 
 .left {
   border-radius: 15px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
+}
+
+@media screen and (max-width: 767px) {
+  .movieFormDiv {
+    width: 45%;
+    margin-left: 0;
+  }
 }

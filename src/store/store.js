@@ -6,6 +6,7 @@ import selectMovieReducer from "./selectedMovieReducer";
 import logRegReducer from "./logRegReducer";
 import authReducer from "./authReducer";
 import favoritesReducer from "./favoritesReducer";
+import usersReducer from "./usersReducer";
 
 const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
@@ -15,6 +16,7 @@ const store = configureStore({
     user: logRegReducer,
     isLoggedIn: authReducer,
     favorites: favoritesReducer,
+    users: usersReducer,
   },
 });
 

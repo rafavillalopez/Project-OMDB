@@ -14,13 +14,11 @@ export const register = createAsyncThunk("REGISTER", async (user) => {
 });
 
 export const loggin = createAsyncThunk("LOGGIN", async (user) => {
- 
-    const req = await axios.post(`/api/auth/login`, user);
+  const req = await axios.post(`/api/auth/login`, user);
 
-    const createdUser = req.data;
+  const createdUser = req.data;
 
-    return createdUser;
-
+  return createdUser;
 });
 
 export const logOut = createAsyncThunk("LOGOUT", async (user) => {
@@ -31,6 +29,11 @@ export const logOut = createAsyncThunk("LOGOUT", async (user) => {
   return createdUser;
 });
 
+export const setUser = createAsyncThunk("SETUSER", async () => {
+  const req = await axios.get(`/api/auth/me`);
+
+  return req.data;
+});
 const logRegReducer = createReducer(
   {},
   {
@@ -62,6 +65,13 @@ const logRegReducer = createReducer(
       return {
         err: action.error,
       };
+    },
+    [setUser.pending]: (state, action) => {
+      return { msg: "No user found..." };
+    },
+    [setUser.fulfilled]: (state, action) => action.payload,
+    [setUser.rejected]: (state, action) => {
+      return {};
     },
   }
 );

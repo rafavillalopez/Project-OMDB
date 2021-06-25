@@ -12,7 +12,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
 }
 
 code {
@@ -27,6 +26,7 @@ code {
   margin: 0 auto;
   justify-content: space-evenly;
   padding-top: 100px;
+  align-items: center;
 }
 
 .ant-card-actions {
@@ -44,8 +44,7 @@ code {
 }
 .ant-page-header-heading-title {
   width: 100%;
-} 
-
+}
 
 .ant-page-header-heading-extra {
   display: flex;
@@ -54,4 +53,16 @@ code {
 
 .ant-page-header {
   padding: 0 24px !important;
+}
+
+@media screen and (max-width: 767px) {
+  .ant-page-header-heading-left {
+    width: 100%;
+  }
+  .ant-page-header-back {
+    display: none;
+  }
+  .container {
+    padding-top: 200px;
+  }
 }

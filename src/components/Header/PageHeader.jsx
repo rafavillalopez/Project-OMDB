@@ -83,7 +83,7 @@ export default function PageHeaderComponent() {
       <PageHeader
         onBack={handleBack}
         title={
-          <div>
+          <div className={s.titleContainer}>
             <Link className={s.title} to="/">
               OMDB
             </Link>

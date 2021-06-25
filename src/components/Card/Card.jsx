@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 import s from "./Card.module.scss";
 import { StarOutlined, DeleteFilled } from "@ant-design/icons";
 import { addFavorite, removeFavorite } from "../../store/favoritesReducer";
-import { isInFavorites } from "./utils";
+import { isInFavorites, capitalizeFirstLetter } from "./utils";
 
-export default function CardComponent({ movie, type }) {
+export default function CardComponent({ movie, type, loading }) {
   const { Meta } = Card;
   const { isLoggedIn, favorites } = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -32,6 +32,7 @@ export default function CardComponent({ movie, type }) {
       message.info(`You have to be Log In`);
     }
   };
+  
   const actions =
     type === "add" && !isInFavorites(favorites, movie["imdbID"])
       ? [<StarOutlined onClick={handlefavoriteAdd} />]
@@ -41,9 +42,14 @@ export default function CardComponent({ movie, type }) {
     movie["Poster"] === "N/A"
       ? "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/No_image_available_450_x_600.svg/450px-No_image_available_450_x_600.svg.png"
       : movie["Poster"];
+
+  const typeOfMov = movie["Type"]
+    ? capitalizeFirstLetter(movie["Type"])
+    : "Movie/Serie";
   return (
     <div className={s.movie}>
       <Card
+        loading={loading}
         hoverable
         style={{ width: 250, borderRadius: 20 }}
         cover={
@@ -58,7 +64,7 @@ export default function CardComponent({ movie, type }) {
         }
         actions={actions}
       >
-        <Meta title={movie["Title"]} description={movie["Type"]} />
+        <Meta title={movie["Title"]} description={typeOfMov} />
       </Card>
     </div>
   );

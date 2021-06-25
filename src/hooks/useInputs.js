@@ -6,6 +6,8 @@ import { message } from "antd";
 import { setLogginFalse, setLogginTrue } from "../store/authReducer";
 import { loggin, register } from "../store/logRegReducer";
 import { getMovies } from "../store/moviesReducer";
+import { getUsers } from "../store/usersReducer";
+import { NotEmpty } from "../utils/utils.global";
 
 const useInputs = () => {
   const [value, setValue] = useState({
@@ -20,17 +22,24 @@ const useInputs = () => {
   const loggIng = (e) => {
     e.preventDefault();
 
-    dispatch(loggin(value)).then((data) => {
-      if (data.payload && data.payload.id) {
-        message.success(`Success login: welcome back ${data.payload.name}`, 3);
-        dispatch(setLogginTrue());
-        history.push("/user");
-      }
-      if (data.error) {
-        message.error(`Unauthorized, try again`, 3);
-        dispatch(setLogginFalse());
-      }
-    });
+    if (NotEmpty({ email: value.email, password: value.password })) {
+      dispatch(loggin(value)).then((data) => {
+        if (data.payload && data.payload.id) {
+          message.success(
+            `Success login: welcome back ${data.payload.name}`,
+            3
+          );
+          dispatch(setLogginTrue());
+          history.push("/user");
+        }
+        if (data.error) {
+          message.error(`Unauthorized, try again`, 3);
+          dispatch(setLogginFalse());
+        }
+      });
+    } else {
+      message.error(`Not empty inputs`);
+    }
     setValue({
       name: "",
       password: "",
@@ -41,17 +50,24 @@ const useInputs = () => {
 
   const signUp = (e) => {
     e.preventDefault();
-    dispatch(register(value)).then((data) => {
-      if (data.payload && data.payload.id) {
-        message.success(`Success: welcome ${data.payload.name}`, 3);
-        dispatch(setLogginTrue());
-        history.push("/user");
-      }
-      if (data.error) {
-        message.error(`Not valid email or password, try again`, 3);
-        dispatch(setLogginFalse());
-      }
-    });
+    if (!NotEmpty({ email: value.email, password: value.password }))
+      message.error(`Not empty inputs`);
+    if (value.password === value.confirm) {
+      dispatch(register(value)).then((data) => {
+        if (data.payload && data.payload.id) {
+          message.success(`Success: welcome ${data.payload.name}`, 3);
+          dispatch(setLogginTrue());
+          history.push("/user");
+        }
+        if (data.error) {
+          message.error(`Not valid email or password, try again`, 3);
+          dispatch(setLogginFalse());
+        }
+      });
+    } else {
+      message.error(`Password and confirmation have to be equal, try again`);
+    }
+
     setValue({
       name: "",
       password: "",
@@ -63,8 +79,24 @@ const useInputs = () => {
   const apiMovies = (e) => {
     e.preventDefault();
     if (value.name.length > 1) {
-      dispatch(getMovies(value.name));
-      history.push("/movies");
+      dispatch(getMovies(value.name)).then(() => {
+        history.push("/movies");
+      });
+    }
+    setValue({
+      name: "",
+      password: "",
+      confirm: "",
+      email: "",
+    });
+  };
+
+  const dbUsers = (e) => {
+    e.preventDefault();
+    if (value.name.length > 1) {
+      dispatch(getUsers(value.name)).then(() => {
+        history.push("/users");
+      });
     }
     setValue({
       name: "",
@@ -83,7 +115,7 @@ const useInputs = () => {
     });
   };
 
-  return { value, onChange, loggIng, signUp, apiMovies };
+  return { value, onChange, loggIng, signUp, apiMovies, dbUsers };
 };
 
 export default useInputs;

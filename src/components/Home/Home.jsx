@@ -2,15 +2,12 @@ import React, { useEffect, useState } from "react";
 
 import s from "./Home.module.scss";
 import CardComponent from "../../components/Card/Card";
-import { getMovioById } from "../../utils/utils.global";
+import { getMovioById, generateRamdomId } from "../../utils/utils.global";
 
 export default function Home() {
-  let idOfHomeHolders = [
-    { movieId: "tt4154796" },
-    { movieId: "tt1375666" },
-    { movieId: "tt0325980" },
-    { movieId: "tt0944947" },
-  ];
+  let idOfHomeHolders = generateRamdomId().map((id) => {
+    return { movieId: id };
+  });
   const [favorites, setFavorites] = useState(idOfHomeHolders);
 
   useEffect(() => {

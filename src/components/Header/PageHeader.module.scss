@@ -6,11 +6,6 @@
   z-index: 1;
   width: 100%;
 }
-@media screen and (max-width: 702px) {
-  .wrapper {
-    width: 100%;
-  }
-}
 
 .btn {
   border-radius: 15px;
@@ -24,4 +19,16 @@
   color: white;
   text-decoration: none;
   outline: none;
+}
+
+@media screen and (max-width: 767px) {
+  .title {
+    padding-top: 18px;
+    padding-left: 5px;
+  }
+  .titleContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
 }

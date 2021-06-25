@@ -3,9 +3,18 @@
 .movie {
   display: flex;
   margin: 26px 26px;
+  height: 516px;
+  object-fit: cover;
+}
+
+.movieDes {
+  display: flex;
+  margin: 26px 26px;
 }
 
 .imagen {
+  object-fit: cover;
+  height: 400px;
   border-top-left-radius: 20px !important;
   border-top-right-radius: 20px !important;
 }

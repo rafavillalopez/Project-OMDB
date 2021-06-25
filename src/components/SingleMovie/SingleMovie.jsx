@@ -1,38 +1,40 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
 
-import s from "./SingleMovie.module.scss";
 import CardComponent from "../Card/Card";
 import InfoCard from "../Card/InfoCard";
 import { selectMovie } from "../../store/selectedMovieReducer";
+import useLoading from "../../hooks/useLoading";
+import { movie } from "../../utils/utils.global";
 
 export default function SingleMovie() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { selectedMovie } = useSelector((state) => state);
-  const history = useHistory();
+  const { loading } = useLoading();
 
   useEffect(() => {
     dispatch(selectMovie(id));
   }, [dispatch, id]);
 
-  console.log(selectedMovie["Title"]);
+  if (loading) {
+    return (
+      <>
+        <div className="container">
+          <CardComponent movie={movie} loading={loading} type="add" />
+          <InfoCard movie={movie} loading={true} />
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
-      <div className="container ">
+      <div className="container">
         <CardComponent movie={selectedMovie} type="add" />
         <InfoCard movie={selectedMovie} />
       </div>
-      <button
-        className={"ant-btn ant-btn-primary " + s.btn}
-        onClick={() => {
-          history.push("/movies");
-        }}
-      >
-        Back To Movies
-      </button>
     </>
   );
 }

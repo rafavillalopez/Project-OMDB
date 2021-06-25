@@ -3,6 +3,12 @@ const router = express.Router();
 const { User } = require("../models");
 const passport = require("passport");
 
+
+router.get("/me", (req, res, next) => {
+  if (!req.user) res.sendStatus(401);
+  res.json(req.user);
+});
+
 router.post("/register", async (req, res, next) => {
   try {
     const user = await User.create(req.body);

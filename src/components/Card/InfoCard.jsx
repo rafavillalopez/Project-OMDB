@@ -4,18 +4,19 @@ import { Descriptions, Card } from "antd";
 import s from "./Card.module.scss";
 import { capitalizeFirstLetter } from "./utils";
 
-export default function InfoCard({ movie }) {
+export default function InfoCard({ movie, loading }) {
   const type = movie["Type"]
     ? capitalizeFirstLetter(movie["Type"])
     : "Movie/Serie";
   return (
-    <div className={s.movie}>
+    <div className={s.movieDes}>
       <Card
+        loading={loading}
         title={`${type} Info`}
         hoverable
         style={{ width: 700, borderRadius: 20 }}
         cover={
-          <Descriptions layout="vertical" bordered size='small'>
+          <Descriptions layout="vertical" bordered size="small">
             <Descriptions.Item label="Genre">
               {movie["Genre"]}
             </Descriptions.Item>
