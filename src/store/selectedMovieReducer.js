@@ -1,5 +1,4 @@
 import {
-  // createAction,
   createReducer,
   createAsyncThunk,
 } from "@reduxjs/toolkit";
@@ -12,7 +11,7 @@ export const selectMovie = createAsyncThunk("SELECT_MOVIE", async (id) => {
   return res.data;
 });
 
-const selectMovieReducer = createReducer([], {
+const selectMovieReducer = createReducer({}, {
   [selectMovie.pending]: (state, action) => ["searching..."],
   [selectMovie.fulfilled]: (state, action) => action.payload,
   [selectMovie.rejected]: (state, action) => ["No entries for this title"],

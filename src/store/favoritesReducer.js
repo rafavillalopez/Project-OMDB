@@ -1,15 +1,23 @@
-import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  createReducer,
+  createAsyncThunk,
+  createAction,
+} from "@reduxjs/toolkit";
 import axios from "axios";
+import { getMovioById } from "../utils/utils.global";
 
 export const getFavorites = createAsyncThunk(
   "GET_FAVORITES",
-  async (userId) => {
+  async (data, thunkApi) => {
     try {
-      const req = await axios.get(`/api/user/${userId}/favorites`);
+      const { user } = thunkApi.getState();
 
-      const createdUser = req.data;
-
-      return createdUser;
+      const req = await axios.get(`/api/users/${user.id}/favorites`);
+      let favorites = [];
+      if (req.data.length) {
+        favorites = getMovioById(req.data);
+      }
+      return favorites;
     } catch (err) {
       throw err;
     }
@@ -21,11 +29,11 @@ export const addFavorite = createAsyncThunk(
   async (movieId, thunkApi) => {
     try {
       const { user } = thunkApi.getState();
-      const req = await axios.post(`/api/user/${user.id}/favorites/${movieId}`);
+      const req = await axios.post(
+        `/api/users/${user.id}/favorites/${movieId}`
+      );
 
-      const newFavorites = req.data;
-
-      return newFavorites;
+      return req.data;
     } catch (err) {
       throw err;
     }
@@ -38,52 +46,62 @@ export const removeFavorite = createAsyncThunk(
     try {
       const { user } = thunkApi.getState();
       const req = await axios.delete(
-        `/api/user/${user.id}/favorites/${movieId}`
+        `/api/users/${user.id}/favorites/${movieId}`
       );
-
-      const newFavorites = req.data;
-
-      return newFavorites;
+      let favorites = [];
+      if (req.data.length) {
+        favorites = getMovioById(req.data);
+      }
+      return favorites;
     } catch (err) {
       throw err;
     }
   }
 );
 
+export const setFavoritesVoid = createAction("FAVORITES_NULL");
+
 const userReducer = createReducer([], {
   [getFavorites.pending]: (state, action) => {
-    return { msg: "creating..." };
+    return [{ msg: "creating..." }];
   },
   [getFavorites.fulfilled]: (state, action) => {
     return action.payload;
   },
   [getFavorites.rejected]: (state, action) => {
-    return {
-      err: action.error,
-    };
+    return [
+      {
+        err: action.error,
+      },
+    ];
   },
   [addFavorite.pending]: (state, action) => {
-    return { msg: "adding..." };
+    return [{ msg: "adding..." }];
   },
   [addFavorite.fulfilled]: (state, action) => {
     return action.payload;
   },
   [addFavorite.rejected]: (state, action) => {
-    return {
-      err: action.error,
-    };
+    return [
+      {
+        err: action.error,
+      },
+    ];
   },
   [removeFavorite.pending]: (state, action) => {
-    return { msg: "deleting..." };
+    return [{ msg: "deleting..." }];
   },
   [removeFavorite.fulfilled]: (state, action) => {
     return action.payload;
   },
   [removeFavorite.rejected]: (state, action) => {
-    return {
-      err: action.error,
-    };
+    return [
+      {
+        err: action.error,
+      },
+    ];
   },
+  [setFavoritesVoid]: (state, action) => (state = []),
 });
 
 export default userReducer;

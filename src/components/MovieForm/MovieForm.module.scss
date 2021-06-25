@@ -1,0 +1,31 @@
+@import "~antd/dist/antd.dark.css";
+.entry {
+  height: 32px;
+  padding: 4px 15px;
+  font-size: 14px;
+  border-radius: 15px;
+  border: 1px solid transparent;
+  color: white;
+  background: #141414;
+  font-weight: 400;
+  border-color: #434343;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  width: 100%;
+  outline: none;
+}
+// @media screen and (max-width: 450px) {
+
+// }
+
+.movieFormDiv {
+  display: inline-block;
+  margin-left: 40px;
+  width: 70%;
+}
+
+.left {
+  border-radius: 15px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}

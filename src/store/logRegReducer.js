@@ -23,17 +23,21 @@ export const loggin = createAsyncThunk("LOGGIN", async (user) => {
 
 });
 
+export const logOut = createAsyncThunk("LOGOUT", async (user) => {
+  const req = await axios.get(`/api/auth/logout`, user);
 
+  const createdUser = req.data;
+
+  return createdUser;
+});
 
 const logRegReducer = createReducer(
   {},
   {
     [register.pending]: (state, action) => {
-      return { msg: "creating..." };
+      return { msg: "Signing up..." };
     },
-    [register.fulfilled]: (state, action) => {
-      return action.payload;
-    },
+    [register.fulfilled]: (state, action) => action.payload,
     [register.rejected]: (state, action) => {
       return {
         err: action.error,
@@ -41,11 +45,20 @@ const logRegReducer = createReducer(
     },
 
     [loggin.pending]: (state, action) => {
-      return { msg: "logging..." };
+      return { msg: "logging In..." };
     },
-
     [loggin.fulfilled]: (state, action) => action.payload,
     [loggin.rejected]: (state, action) => {
+      return {
+        err: action.error,
+      };
+    },
+
+    [logOut.pending]: (state, action) => {
+      return { msg: "logging Out..." };
+    },
+    [logOut.fulfilled]: (state, action) => action.payload,
+    [logOut.rejected]: (state, action) => {
       return {
         err: action.error,
       };

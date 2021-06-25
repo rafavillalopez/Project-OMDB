@@ -1,0 +1,27 @@
+@import "~antd/dist/antd.dark.css";
+
+.wrapper {
+  background-color: #141414;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+}
+@media screen and (max-width: 702px) {
+  .wrapper {
+    width: 100%;
+  }
+}
+
+.btn {
+  border-radius: 15px;
+}
+
+.title {
+  color: white;
+}
+
+.title:hover {
+  color: white;
+  text-decoration: none;
+  outline: none;
+}

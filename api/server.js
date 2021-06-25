@@ -55,11 +55,11 @@ passport.use(
   )
 );
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser( (user, done) =>{
   done(null, user.id);
 });
 
-passport.deserializeUser(function (id, done) {
+passport.deserializeUser( (id, done)=> {
   User.findByPk(id).then((user) => done(null, user));
 });
 
@@ -68,7 +68,7 @@ app.use("/api", routes);
 
 (async function runServer() {
   try {
-    await db.sync({ force: true });
+    await db.sync({ force: false });
     console.log("Nos hemos conectado a la base de datos");
     app.listen(3001, () => {
       console.log(`La app ha arrancado en http://localhost:${3001}`);

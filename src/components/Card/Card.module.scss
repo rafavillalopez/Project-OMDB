@@ -1,0 +1,15 @@
+@import "~antd/dist/antd.dark.css";
+
+.movie {
+  display: flex;
+  margin: 26px 26px;
+}
+
+.imagen {
+  border-top-left-radius: 20px !important;
+  border-top-right-radius: 20px !important;
+}
+.imagen:hover {
+  cursor: pointer;
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
