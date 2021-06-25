@@ -8,7 +8,7 @@ export default function AllMovies() {
   const { movies } = useSelector((state) => state);
   const { loading } = useLoading();
 
-  if (!movies.lenght) {
+  if (!movies.length) {
     return (
       <div className="container">
         <CardComponent movie={movie} type="add" loading={loading} />
