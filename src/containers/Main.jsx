@@ -1,14 +1,14 @@
 import React from "react";
 import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 
-import PageHeaderComponent from "./Header/PageHeader";
+import PageHeaderComponent from "../components/Header/PageHeader";
 import AllMovies from "../components/AllMovies/AllMovies";
 import SingleMovie from "../components/SingleMovie/SingleMovie";
 import Register from "../components/RegisterLogin/Register";
 import Loggin from "../components/RegisterLogin/Loggin";
 import Users from "../components/Users/Uers";
 import UserView from "../components/UserView/UserView";
-import Home from "./Home/Home";
+import Home from "../components/Home/Home";
 import SingleUser from "../components/SingleUser/SingleUser";
 
 import { useDispatch } from "react-redux";
